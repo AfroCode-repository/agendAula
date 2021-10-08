@@ -1,0 +1,47 @@
+[
+    {
+        "type": "Directory",
+        "name": "c:\\xampp\\htdocs\\serviceControl\\routes",
+        "parent_id": null,
+        "fsPath": "c:\\xampp\\htdocs\\serviceControl\\routes",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "9q4fQ5vIeCldZFXh"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\xampp\\htdocs\\serviceControl\\resources\\views",
+        "parent_id": null,
+        "fsPath": "c:\\xampp\\htdocs\\serviceControl\\resources\\views",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "Yzjnh5ZFK7Dk3cPa"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\xampp\\htdocs\\serviceControl\\public",
+        "parent_id": null,
+        "fsPath": "c:\\xampp\\htdocs\\serviceControl\\public",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "eTJs7WILy36P8iBY"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\xampp\\htdocs\\serviceControl\\app\\Models",
+        "parent_id": null,
+        "fsPath": "c:\\xampp\\htdocs\\serviceControl\\app\\Models",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "pVt91klmjDGwB8bM"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\xampp\\htdocs\\serviceControl\\app\\Http\\Controllers",
+        "parent_id": null,
+        "fsPath": "c:\\xampp\\htdocs\\serviceControl\\app\\Http\\Controllers",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "7DVG3UACoFev20u5"
+    }
+]
