@@ -21,9 +21,6 @@ $lista_eventos = implode(',',$lista_eventos);
 <script src="{{ asset('js/vendor/fullcalendar.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-        excluirTodosServicoAgendamento()
-        resumoServicoAgendamentos()
-
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -55,6 +52,16 @@ $lista_eventos = implode(',',$lista_eventos);
             //height: l(window).height() - 200,
             headerToolbar: { left: "prev,next today", center: "title", right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth" },
             editable: false,
+            locale: 'pt-br',
+            buttonText: {
+                prev: 'Anterior',
+                next: 'Próximo',
+                today: 'Hoje',
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Hoje',
+                list: 'Lista'
+            },
             events:[{!! $lista_eventos !!}],
             eventClick: function(info) {
                 bloquear();
@@ -120,7 +127,7 @@ $lista_eventos = implode(',',$lista_eventos);
                                 <button class="btn btn-lg font-16 btn-info"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalFiltro">
-                                <i class="mdi mdi-plus-circle-outline"></i> Filtrar por Aluno</button>
+                                <i class="fas fa-filter"></i> Filtrar por Aluno</button>
                             </div>
                         </div> <!-- end col-->
                         <div class="col-lg-4">
@@ -128,7 +135,7 @@ $lista_eventos = implode(',',$lista_eventos);
                                 <button class="btn btn-lg font-16 btn-warning"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalRecibo">
-                                <i class="mdi mdi-plus-circle-outline"></i> Recibo por Aluno</button>
+                                <i class="far fa-file-alt"></i> Recibo por Aluno</button>
                             </div>
                         </div> <!-- end col-->
                     </div>
