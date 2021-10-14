@@ -25,6 +25,7 @@ class PagesController extends Controller
         $data['title_page'] = 'Bem vindo ao Sistema AgendAula';
 
 
+
         $data['status_scheduling'] = DB::table('sys_status AS s')
                                     ->select('s.cod_status',
                                             's.description as status_scheduling')

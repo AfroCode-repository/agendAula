@@ -119,14 +119,14 @@ $lista_eventos = implode(',',$lista_eventos);
                                 <button class="btn btn-lg font-16 btn-success"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalNovoAgendamento">
-                                <i class="mdi mdi-plus-circle-outline"></i> Criar</button>
+                                <i class="mdi mdi-plus-circle-outline"></i> Cadastrar Aula</button>
                             </div>
                         </div> <!-- end col-->
                         <div class="col-lg-4">
                             <div class="d-grid">
                                 <button class="btn btn-lg font-16 btn-info"
                                 data-bs-toggle="modal"
-                                data-bs-target="#modalFiltro">
+                                data-bs-target="#modalCalendarioPorAluno">
                                 <i class="fas fa-filter"></i> Filtrar por Aluno</button>
                             </div>
                         </div> <!-- end col-->
@@ -134,7 +134,7 @@ $lista_eventos = implode(',',$lista_eventos);
                             <div class="d-grid">
                                 <button class="btn btn-lg font-16 btn-warning"
                                 data-bs-toggle="modal"
-                                data-bs-target="#modalRecibo">
+                                data-bs-target="#modalReciboPorAluno">
                                 <i class="far fa-file-alt"></i> Recibo por Aluno</button>
                             </div>
                         </div> <!-- end col-->
@@ -154,43 +154,204 @@ $lista_eventos = implode(',',$lista_eventos);
                     </div> <!-- end row -->
                 </div> <!-- end card body-->
             </div> <!-- end card -->
-
-            <!-- Add New Event MODAL -->
-            {{--Modal para ver agendamento--}}
-            <div id="modalVerAgendamento" class="modal fade" aria-labelledby="staticBackdropLabel" tabindex="-1" role="dialog" aria-labelledby="modalVerAgendamentoLabel" aria-hidden="true">
-                <div class="modal-dialog  modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header modal-colored-header bg-info">
-                            <h4 class="modal-title" id="modalVerAgendamentoLabel">Resumo de Agendamento</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="col-12">
-                                <div class="text-center">
-                                    <h2 class="mt-0"><i class="fas fa-exclamation-circle"></i></h2>
-                                    <h3 class="mt-0">Informações do Agendamento!</h3>
-
-                                    <div class="row" id="verHTMLAgendamento">
-
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-rounded" value="" id="verCliente" data-bs-dismiss="modal"><i class="fab fa-searchengin"></i> Visualizar Cliente</button>
-                            <button type="button" class="btn btn-primary btn-rounded" value="" id="mostraAlterarAgendamento" data-bs-dismiss="modal"><i class="fas fa-sync-alt"></i> Alterar agendamento</button>
-                            <button type="button" class="btn btn-info btn-rounded" value="" id="mudarAtribuirStatusAgendamento"><i class="fas fa-broom"></i> Atribuir Status</button>
-                            <button type="button" class="btn btn-success btn-rounded" value="" id="mudarStatusConcluirAgendamento"><i class="fas fa-check"></i> Concluir</button>
-                            <button type="button" class="btn btn-warning btn-rounded"  value="" id="mudarStatusExcluirAgendamento"><i class="fas fa-trash"></i> Excluir</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            {{--<button type="button" id="salvaNovoClienteServico" class="btn btn-success">Salvar</button>--}}
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            {{--fim Modal para ver agendamento--}}
-            <!-- end modal-->
         </div>
         <!-- end col-12 -->
     </div> <!-- end row -->
+
+    <!-- Add New Event MODAL -->
+    {{--Modal para ver agendamento--}}
+    <div id="modalNovoAgendamento" class="modal fade" aria-labelledby="staticBackdropLabel" tabindex="-1" role="dialog" aria-labelledby="modalNovoAgendamentoLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header modal-colored-header bg-success">
+                    <h4 class="modal-title" id="modalNovoAgendamentoLabel">Cadastrar nova aula</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <div class="row" id="verHTMLAgendamento">
+                                    <div class="col-md-6 spaceForm">
+                                        <label class="group" for="enderecoAgendamento"> Aluno:</label>
+                                        <select class="form-control" id="novoAluno" name="novoAluno">
+                                            <option value="" >selecione uma opção</option>
+                                            @foreach ($listaAlunos as $lista)
+                                                <option value="{{ $lista->id }}">{{ $lista->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 spaceForm">
+                                        <label class="group" for="enderecoAgendamento"> Mês de Inicio:</label>
+                                        <select class="form-control" id="mesAula" name="mesAula">
+                                            <option value="" >selecione uma opção</option>
+                                            <option value='01'>Janeiro</option>
+                                            <option value='02'>Fevereiro</option>
+                                            <option value='03'>Março</option>
+                                            <option value='04'>Abril</option>
+                                            <option value='05'>Maio</option>
+                                            <option value='06'>Junho</option>
+                                            <option value='07'>Julho</option>
+                                            <option value='08'>Agosto</option>
+                                            <option value='09'>Setembro</option>
+                                            <option value='10'>Outubro</option>
+                                            <option value='11'>Novembro</option>
+                                            <option value='12'>Dezembro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 spaceForm">
+                                        <label class="group" for="enderecoAgendamento"> Qtd de meses (1-6)</label>
+                                        <select class="form-control" id="qtdMeses" name="qtdMeses">
+                                            <option value="" >selecione uma opção</option>
+                                            <option selected value='1'>1</option>
+                                            <option value='2'>2</option>
+                                            <option value='3'>3</option>
+                                            <option value='4'>4</option>
+                                            <option value='5'>5</option>
+                                            <option value='6'>6</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 spaceForm">
+                                        <label class="group" for="enderecoAgendamento"> Hora Inicio</label>
+                                        <input type="time" class="form-control" id="horaInicio" name="horaInicio"
+                                            min="09:00" max="18:00" required>
+
+                                        <small>Coloque entre 8h as 18h</small>
+                                    </div>
+
+                                    <div class="col-md-4 spaceForm">
+                                        <label class="group" for="enderecoAgendamento"> Duração da Aula</label>
+                                        <input type="time" class="form-control" id="duracaoAula" name="duracaoAula"
+                                            min="00:00" max="04:00"  value="01:00" required>
+
+                                        <small>Padrão 1 hora - limite 4Horas</small>
+                                    </div>
+
+
+                                <hr class="spaceForm">
+                                <div class="col-md-3">
+                                    <div class="form-check form-checkbox-success mb-2">
+                                        <input type="checkbox" class="form-check-input" id="segundaNovo">
+                                        <label class="form-check-label" for="segundaNovo">Segunda-Feira</label>
+                                    </div>
+                                    <div class="form-check form-checkbox-success mb-2">
+                                        <input type="checkbox" class="form-check-input" id="tercaNovo">
+                                        <label class="form-check-label" for="tercaNovo">Terça-Feira</label>
+                                    </div>
+                                    <div class="form-check form-checkbox-success mb-2">
+                                        <input type="checkbox" class="form-check-input" id="quartaNovo">
+                                        <label class="form-check-label" for="quartaNovo">Quarta-Feira</label>
+                                    </div>
+                                    <div class="form-check form-checkbox-success mb-2">
+                                        <input type="checkbox" class="form-check-input" id="quintaNovo">
+                                        <label class="form-check-label" for="quintaNovo">Quinta-Feira</label>
+                                    </div>
+                                    <div class="form-check form-checkbox-success mb-2">
+                                        <input type="checkbox" class="form-check-input" id="sextaNovo">
+                                        <label class="form-check-label" for="sextaNovo">Sexta-Feira</label>
+                                    </div>
+                                    <div class="form-check form-checkbox-success mb-2">
+                                        <input type="checkbox" class="form-check-input" id="sabadoNovo">
+                                        <label class="form-check-label" for="sabadoNovo">Sábado</label>
+                                    </div>
+                                    <div class="form-check form-checkbox-success mb-2">
+                                        <input type="checkbox" class="form-check-input" id="domingoNovo">
+                                        <label class="form-check-label" for="domingoNovo">Domingo</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-rounded" value="" id="salvarNovaAula"><i class="fas fa-check"></i> Salvar</button>
+                    <button type="button" class="btn btn-danger btn-rounded" data-bs-dismiss="modal">Fechar</button>
+                    {{--<button type="button" id="salvaNovoClienteServico" class="btn btn-success">Salvar</button>--}}
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {{--fim Modal para ver agendamento--}}
+
+    {{--Modal para ver agendamento--}}
+    <div id="modalCalendarioPorAluno" class="modal fade" aria-labelledby="staticBackdropLabel" tabindex="-1" role="dialog" aria-labelledby="modalCalendarioPorAlunoLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-sm">
+            <div class="modal-content">
+                <div class="modal-header modal-colored-header bg-info">
+                    <h4 class="modal-title" id="modalCalendarioPorAlunoLabel">Filtrar Calendário por Aluno</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <div class="row" id="verHTMLAgendamentoFiltro">
+                                <div class="col-md-12 spaceForm">
+                                    <label class="group" for="enderecoAgendamento"> Aluno:</label>
+                                    <select class="form-control" id="novoAluno" name="novoAluno">
+                                        <option value="" >selecione uma opção</option>
+                                        @foreach ($listaAlunos as $listafiltro)
+                                            <option value="{{ $listafiltro->id }}">{{ $listafiltro->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-rounded" value="" id="FiltrarPorAluno"><i class="fas fa-check"></i> Filtrar</button>
+                    <button type="button" class="btn btn-danger btn-rounded" data-bs-dismiss="modal">Fechar</button>
+                    {{--<button type="button" id="salvaNovoClienteServico" class="btn btn-success">Salvar</button>--}}
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {{--fim Modal para ver agendamento--}}
+
+    {{--Modal para ver agendamento--}}
+    <div id="modalReciboPorAluno" class="modal fade" aria-labelledby="staticBackdropLabel" tabindex="-1" role="dialog" aria-labelledby="modalReciboPorAlunoLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-sm">
+            <div class="modal-content">
+                <div class="modal-header modal-colored-header bg-warning">
+                    <h4 class="modal-title" id="modalReciboPorAlunoLabel">Criar Recibo para Aluno</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <div class="row" id="verHTMLAgendamentoFiltro">
+                                <div class="col-md-12 spaceForm">
+                                    <label class="group" for="enderecoAgendamento"> Aluno:</label>
+                                    <select class="form-control" id="novoAluno" name="novoAluno">
+                                        <option value="" >selecione uma opção</option>
+                                        @foreach ($listaAlunos as $recibo)
+                                            <option value="{{ $recibo->id }}">{{ $recibo->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-12 spaceForm">
+                                    <label class="group" for="enderecoAgendamento"> Data (Mês - Ano):</label>
+                                    <input type="text"
+                                    class="datepicker-here"
+                                    data-language='pt-BR'
+                                    data-min-view="months"
+                                    data-view="months"
+                                    data-date-format="mm-yyyy"
+                                    placeholder="Selecione um Mês"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-rounded" value="" id="FiltrarPorAluno"><i class="fas fa-check"></i> Criar Recibo</button>
+                    <button type="button" class="btn btn-danger btn-rounded" data-bs-dismiss="modal">Fechar</button>
+                    {{--<button type="button" id="salvaNovoClienteServico" class="btn btn-success">Salvar</button>--}}
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {{--fim Modal para ver agendamento--}}
+    <!-- end modal-->
+
 @endsection
