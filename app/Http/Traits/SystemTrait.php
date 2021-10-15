@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\SysLogUpdate;
 use App\Models\Aluno;
+use App\Models\Responsavel;
 
 trait SystemTrait {
     //variaveis do sistema para todos os controladores
     public function varDefault(){
         $data['listaAlunos'] = Aluno::where('status', 1)->get();
+        $data['listaResponsaveis'] = Responsavel::where('status', 1)->get();
         return $data;
     }//fim função
 

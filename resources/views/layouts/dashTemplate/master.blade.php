@@ -163,10 +163,10 @@
                 });
                 /*fim sidebar functions*/
 
-                $('#listarAlunoServico').click(function(){
-                    let client = $('#listaAluno').val()
+                $('#listarAluno').click(function(){
+                    let aluno = $('#listaAluno').val()
 
-                    if (0 == client || '' == client || null == client) {
+                    if (0 == aluno || '' == aluno || null == aluno) {
                         Swal.fire(
                             'Atenção!',
                             'Por Favor Selecione um Aluno',
@@ -174,7 +174,22 @@
                         )
                     } else {
                         bloquear();
-                        window.location =  base_URL+'/dadosAluno/'+client
+                        window.location =  base_URL+'/dadosAluno/'+aluno
+                    }
+                })
+
+                $('#listarResponsavel').click(function(){
+                    let responsavel = $('#listaResponsavel').val()
+
+                    if (0 == responsavel || '' == responsavel || null == responsavel) {
+                        Swal.fire(
+                            'Atenção!',
+                            'Por Favor Selecione um responsável',
+                            'info'
+                        )
+                    } else {
+                        bloquear();
+                        window.location =  base_URL+'/dadosResponsavel/'+responsavel
                     }
                 })
             });

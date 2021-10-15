@@ -32,6 +32,19 @@ $lista_eventos = implode(',',$lista_eventos);
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
+
+        $("#FiltrarPorAluno").click(function(){
+            let id = $("#idFiltroAluno").val()
+            if('' == id || null == id){
+                Swal.fire('Atenção!','Selecione um aluno para o Filtro!','warning')
+            }else if(0 == id){
+                window.location.href = base_URL+"/home";
+            }else{
+                bloquear()
+                window.location.href = base_URL+"/home/"+id;
+            }
+
+        })
 })//fim ready
 
     /*eventos que foram adicionados após o carregamento da pagina*/
@@ -142,6 +155,13 @@ $lista_eventos = implode(',',$lista_eventos);
                 </div>
             </div>
 
+            @if (isset($filtroNome))
+                @foreach ($filtroNome as $f)
+                    <h4 id="filtradoPor">Filtrado para o Aluno: {{ $f->name }}</h4>
+                @endforeach
+            @endif
+
+
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -213,7 +233,7 @@ $lista_eventos = implode(',',$lista_eventos);
                                     <div class="col-md-4 spaceForm">
                                         <label class="group" for="enderecoAgendamento"> Hora Inicio</label>
                                         <input type="time" class="form-control" id="horaInicio" name="horaInicio"
-                                            min="09:00" max="18:00" required>
+                                            min="08:00" max="18:00" required>
 
                                         <small>Coloque entre 8h as 18h</small>
                                     </div>
@@ -223,13 +243,14 @@ $lista_eventos = implode(',',$lista_eventos);
                                         <input type="time" class="form-control" id="duracaoAula" name="duracaoAula"
                                             min="00:00" max="04:00"  value="01:00" required>
 
-                                        <small>Padrão 1 hora - limite 4Horas</small>
+                                        <small>Padrão 1 hora - limite Max. 4 horas</small>
                                     </div>
 
 
                                 <hr class="spaceForm">
                                 <div class="col-md-3">
-                                    <div class="form-check form-checkbox-success mb-2">
+                                    <label class="group" for="enderecoAgendamento"> Selecione os dias da Semana</label>
+                                    <div class="form-check form-checkbox-success mb-2 spaceForm">
                                         <input type="checkbox" class="form-check-input" id="segundaNovo">
                                         <label class="form-check-label" for="segundaNovo">Segunda-Feira</label>
                                     </div>
@@ -286,8 +307,9 @@ $lista_eventos = implode(',',$lista_eventos);
                             <div class="row" id="verHTMLAgendamentoFiltro">
                                 <div class="col-md-12 spaceForm">
                                     <label class="group" for="enderecoAgendamento"> Aluno:</label>
-                                    <select class="form-control" id="novoAluno" name="novoAluno">
+                                    <select class="form-control" id="idFiltroAluno" name="idFiltroAluno">
                                         <option value="" >selecione uma opção</option>
+                                        <option value="0" >Todos</option>
                                         @foreach ($listaAlunos as $listafiltro)
                                             <option value="{{ $listafiltro->id }}">{{ $listafiltro->name}}</option>
                                         @endforeach
