@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Traits\SystemTrait; //essa variavel chama um conjunto de funções usadas diversas vezes, usando trait ela não limita certas funcionalidades de herença
 use App\Models\Aluno;
+use App\Models\Aluno_responsaveis;
 use Illuminate\Support\Facades\DB;
 class AlunoController extends Controller
 {
@@ -45,6 +46,37 @@ class AlunoController extends Controller
                                                 inner join agendamentos ag on aa.id_agendamento = ag.id and ag.`status` = 1
                                                 $filtroID;");
             return view('Home', $data);
+    }//fim função
+
+    public function storeNovoAluno(Request $request){
+        $nome = $request->nome;
+        $cor = $request->cor;
+        $responsavel = $request->responsavel;
+        $parentesco = $request->parentesco;
+
+        $aluno = new Aluno;
+        $aluno->name = $nome;
+        $aluno->btnClass = $cor;
+        $aluno->save();
+
+        $this->verificaCRUD($aluno, "Erro ao Inserir dados");
+
+        $aluno_Id = $aluno->id;
+
+        $alunoResponsavel = new Aluno_responsaveis;
+        $alunoResponsavel->id_responsavel = $responsavel;
+        $alunoResponsavel->id_aluno = $aluno_Id;
+        $alunoResponsavel->parentesco = $parentesco;
+
+        $alunoResponsavel->save();
+
+        $this->verificaCRUD($alunoResponsavel, "Erro ao Inserir dados");
+
+        $data['success'] = true;
+        $data['message'] = 'Dados Inseridos com Sucesso';
+        DB::commit();
+        echo json_encode($data);
+        return;
     }//fim função
 
 }

@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Traits\SystemTrait; //essa variavel chama um conjunto de funções usadas diversas vezes, usando trait ela não limita certas funcionalidades de herença
+use App\Models\Aluno;
 use App\Models\Responsavel;
 use Illuminate\Support\Facades\DB;
 
@@ -73,6 +74,15 @@ class PagesController extends Controller
 
     }//fim função
 
+    public function showDadosAluno(){
+        $page = 'show.dados.aluno'; // pagina a ser mostrada e traduzida
+        $data = $this->varDefault($page);
+        $data['title_page'] = 'Dados Cadastrados do responsáveis';
+
+        return view('verDados.aluno', $data);
+
+    }//fim função
+
     public function pesquisaEndereco(Request $request){
         $cep = trim(str_replace("-","",$request->cep));
 
@@ -99,6 +109,8 @@ class PagesController extends Controller
         $page = 'show.novo.aluno'; // pagina a ser mostrada e traduzida
         $data = $this->varDefault($page);
         $data['title_page'] = 'Cadastrar Novo Aluno';
+
+        $data['alunos'] = Aluno::all();
 
         return view('cadastro.aluno', $data);
     }

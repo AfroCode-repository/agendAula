@@ -57,93 +57,46 @@
             bloquear()
 
             let Nome = $("#Nome").val()
-            let Cep = $("#Cep").val()
-            let Endereco = $("#Endereco").val()
-            let Numero = $("#Numero").val()
-            let Complemento = $("#Complemento").val()
-            let Bairro = $("#Bairro").val()
-            let Cidade = $("#Cidade").val()
-            let Estado = $("#Estado").val()
-            let Telefone_1 = $("#Telefone_1").val()
-            let Telefone_2 = $("#Telefone_2").val()
-            let Telefone_3 = $("#Telefone_3").val()
 
-            $("#Nome").removeClass('is-invalid')
-            $("#Cep").removeClass('is-invalid')
-            $("#Endereco").removeClass('is-invalid')
-            $("#Numero").removeClass('is-invalid')
-            $("#Complemento").removeClass('is-invalid')
-            $("#Bairro").removeClass('is-invalid')
-            $("#Cidade").removeClass('is-invalid')
-            $("#Estado").removeClass('is-invalid')
-            $("#Telefone_1").removeClass('is-invalid')
+            let nome = $("#nome").val()
+            let cor = $("#cor").val()
+            let responsavel = $("#responsavel").val()
+            let parentesco = $("#parentesco").val()
+
+            $("#nome").removeClass('is-invalid')
+            $("#cor").removeClass('is-invalid')
+            $("#responsavel").removeClass('is-invalid')
+            $("#parentesco").removeClass('is-invalid')
 
 
-            if(!Nome){
+            if(!nome){
                 desbloquear()
-                $("#Nome").addClass('is-invalid')
+                $("#nome").addClass('is-invalid')
                 Swal.fire('Atenção!','Informe Nome do Responsável!','warning')
-            }else if(!Cep){
+            }else if(!cor){
                 desbloquear()
-                $("#Cep").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe CEP do Responsável!','warning')
-            }else if(!Endereco){
+                $("#cor").addClass('is-invalid')
+                Swal.fire('Atenção!','Informe cor do para o Calendário!','warning')
+            }else if(!responsavel){
                 desbloquear()
-                $("#Endereco").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe Endereco do Responsável!','warning')
-            }else if(!Numero){
+                $("#responsavel").addClass('is-invalid')
+                Swal.fire('Atenção!','Selecione um responsável para o Aluno!','warning')
+            }else if(!parentesco){
                 desbloquear()
                 $("#Numero").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe Número do endereço do Responsável!','warning')
-            }else if(!Bairro){
-                desbloquear()
-                $("#Bairro").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe Bairro do endereço do Responsável!','warning')
-            }else if(!Cidade){
-                desbloquear()
-                $("#Cidade").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe Cidade do Responsável!','warning')
-            }else if(!Estado){
-                desbloquear()
-                $("#Estado").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe Estado do Responsável!','warning')
-            }else if(!Telefone_1 || false == validPhone(Telefone_1)){
-                desbloquear()
-                $("#Telefone_1").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe Telefone 1 do Responsável!','warning')
-            }else if(false == validPhone(Telefone_2)  && '' != Telefone_2){
-                desbloquear()
-                $("#Telefone_2").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe Telefone 2 Válido!','warning')
-            }else if(false == validPhone(Telefone_3) && '' != Telefone_3){
-                desbloquear()
-                $("#Telefone_3").addClass('is-invalid')
-                Swal.fire('Atenção!','Informe Telefone 2 Válido!','warning')
+                Swal.fire('Atenção!','Selecione o Parentesco do responsável!','warning')
             }else{
                 let data = $(this).serializeArray()
 
                 data.push({name: "_token", value: '{{ csrf_token() }}' })
 
-                data.push({name: "Nome", value: Nome })
-                data.push({name: "Cep", value: Cep })
-                data.push({name: "Endereco", value: Endereco })
-                data.push({name: "Numero", value: Numero })
-                data.push({name: "Complemento", value: Complemento })
-                data.push({name: "Bairro", value: Bairro })
-                data.push({name: "Cidade", value: Cidade })
-                data.push({name: "Estado", value: Estado })
-                data.push({name: "Telefone_1", value: Telefone_1 })
-
-                if(Telefone_2){
-                    data.push({name: "Telefone_2", value: Telefone_2 })
-                }
-
-                if(Telefone_3){
-                    data.push({name: "Telefone_3", value: Telefone_3 })
-                }
+                data.push({name: "nome", value: nome })
+                data.push({name: "cor", value: cor })
+                data.push({name: "responsavel", value: responsavel })
+                data.push({name: "parentesco", value: parentesco })
 
                 $.ajax({
-                    url: "{{ route('salvar.novo.responsavel') }}",
+                    url: "{{ route('salvar.novo.aluno') }}",
                     type: 'POST',
                     data:  $.param(data),
                     dataType: 'json',
@@ -175,7 +128,7 @@
 
         $(".verDados").click(function(){
             let id = $(this).val()
-            window.location = base_URL+"/dadosResponsavel/"+id;
+            window.location = base_URL+"/dadosAluno/"+id;
         })
 
 })//fim ready
@@ -225,8 +178,8 @@
                                     <label for="responsavel" class="form-label">Responsável</label>
                                     <select class="form-control select2" id="responsavel" name="responsavel">
                                         <option value="">selecione uma opção</option>
-                                        @foreach ($listaResponsaveis as $r)
-                                            <option value="{{ $r->id }}">{{ $r->nome }}</option>
+                                        @foreach ($listaResponsaveis as $a)
+                                            <option value="{{ $a->id }}">{{ $a->nome }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -269,14 +222,25 @@
                         <tr>
                             <th>#</th>
                             <th>Nome do aluno</th>
-                            <th>Responsável</th>
                             <th>Ativo</th>
                             <th>Ação</th>
                         </tr>
                         </thead>
-
                         <tbody>
-
+                            @foreach ($alunos as $a)
+                            <tr>
+                                <td>{{ $a->id }}</td>
+                                <td>{{ $a->name }}</td>
+                                @if (1 == $a->status)
+                                    <td><i class='fas fa-check text-success'></i> Ativo</td>
+                                @else
+                                    <td><i class='fas fa-check text-success'></i> Ativo</td>
+                                @endif
+                                <td>
+                                    <button type="button" value="{{ $a->id }}" class="btn btn-info verDados"><i class="fas fa-user-edit"></i> Ver Dados</button>
+                                </td>
+                            <tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

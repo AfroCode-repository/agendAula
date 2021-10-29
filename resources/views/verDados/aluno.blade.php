@@ -187,130 +187,72 @@
 </script>
 
 @endsection
+
 <!-- Start Content-->
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
 
-    <div class="row">
-        <div class="col-12">
+                <h3 class="header-title mb-3">Responsavel: FULANO</h3>
 
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <form class="form-post-Cliente" autocomplete="off" name="formCreate">
-                            @csrf
-                            <h4 class="header-title">Informe os dados do Novo Responsável</h4>
-                            <p class="text-muted font-14">
-                            </p>
-                            <div class="row">
+                <form>
+                    <div id="basicwizard">
 
-                                <div class="col-md-4 spaceForm">
-                                    <label for="Nome" class="form-label">Nome</label>
-                                    <input type="text" name="Nome" id="Nome" class="form-control Nome">
-                                </div>
+                        <ul class="nav nav-pills nav-justified form-wizard-header mb-4">
+                            <li class="nav-item">
+                                <a href="#basictab1" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2 active">
+                                    <i class="mdi mdi-account-circle me-1"></i>
+                                    <span class="d-none d-sm-inline">Responsaveis</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#basictab2" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+                                    <i class="mdi mdi-face-profile me-1"></i>
+                                    <span class="d-none d-sm-inline">Calendario de aulas</span>
+                                </a>
+                            </li>
+                        </ul>
 
-                                <div class="col-md-3 spaceForm">
-                                    <label for="Cep" class="form-label">CEP</label>
-                                    <input type="text" name="Cep" id="Cep" class="form-control Cep" data-toggle="input-mask" data-mask-format="00000-000">
-                                </div>
+                        <div class="tab-content b-0 mb-0">
+                            <div class="tab-pane active" id="basictab1">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="header-title">Lista de Alunos Cadastrados</h4>
+                                        <table class="table dataTables table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nome</th>
+                                                <th>Ativo</th>
+                                                <th>Ação</th>
+                                            </tr>
+                                            </thead>
 
-                                <div class="col-md-3 spaceForm">
-                                    <label for="Endereco" class="form-label">Endereço</label>
-                                    <input type="text" name="Endereco" id="Endereco" class="form-control Endereco">
-                                </div>
+                                            <tbody>
 
-                                <div class="col-md-2 spaceForm">
-                                    <label for="Numero" class="form-label">Número</label>
-                                    <input type="text" name="Numero" id="Numero" class="form-control Numero">
-                                </div>
-
-                                <div class="col-md-3 spaceForm">
-                                    <label for="Complemento" class="form-label">Complemento</label>
-                                    <input type="text" name="Complemento" id="Complemento" class="form-control Complemento">
-                                    <small>*não obrigatório</small>
-                                </div>
-
-                                <div class="col-md-3 spaceForm">
-                                    <label for="Bairro" class="form-label">Bairro</label>
-                                    <input type="text" name="Bairro" id="Bairro" class="form-control Bairro">
-                                </div>
-
-                                <div class="col-md-3 spaceForm">
-                                    <label for="Cidade" class="form-label">Cidade</label>
-                                    <input type="text" name="Cidade" id="Cidade" class="form-control Cidade">
-                                </div>
-                                <div class="col-md-3 spaceForm">
-                                    <label for="Estado" class="form-label">Estado</label>
-                                    <input type="text" name="Estado" id="Estado" class="form-control Estado">
-                                </div>
-                                @for ($i = 1; $i < 4; $i++)
-                                    <div class="col-md-4 spaceForm">
-                                        <label for="Telefone_{{$i}}" class="form-label">Telefone {{$i}}</label>
-                                        <input type="text" name="Telefone_{{$i}}" id="Telefone_{{$i}}" class="form-control Telefone_{{$i}}" data-toggle="input-mask" data-mask-format="(00)0000-00009">
-                                        @if ($i > 1)
-                                            <small>*não obrigatório</small>
-                                        @endif
-                                    </div>
-                                @endfor
-                                <!--div class="col-md-6 spaceForm">
-                                    <label for="price" class="form-label">Parentesco</label>
-                                    <select class="form-control select2" id="parentesco" name="parentesco">
-                                        <option value="">selecione uma opção</option>
-                                        <option value="Pai">Pai</option>
-                                        <option value="Mãe">Mãe</option>
-                                        <option value="Irmão(a)">Irmão(a)</option>
-                                        <option value="Primo">Primo</option>
-                                        <option value="Tio(a)">Tio(a)</option>
-                                        <option value="Avô(a)">Avô(a)</option>
-                                    </select>
-                                </div-->
-                                <div class="spaceForm"></div>
-                                <hr>
-                                <div class="form-group col-md-12">
-                                    <center><a type="button" id="salvar" class="btn btn-success"><i class="far fa-save"></i> salvar</a></center>
-                                </div>
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- end col -->
+                                </div> <!-- end row -->
                             </div>
-                        </form>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end col-12 -->
-    </div> <!-- end row -->
+                            <div class="tab-pane" id="basictab2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="header-title">Lista de Endereço Cadastrados</h4>
+                                        Calenario
+                                    </div> <!-- end col -->
+                                </div> <!-- end row -->
+                            </div>
+                        </div> <!-- tab-content -->
+                    </div> <!-- end #basicwizard-->
+                </form>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Lista de Responsáveis Cadastrados</h4>
-                    <table class="table dataTables table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nome</th>
-                            <th>Ativo</th>
-                            <th>Ação</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($responsaveis as $r)
-                            <tr>
-                                <td>{{ $r->id }}</td>
-                                <td>{{ $r->nome }}</td>
-                                @if (1 == $r->status)
-                                    <td><i class='fas fa-check text-success'></i> Ativo</td>
-                                @else
-                                    <td><i class='fas fa-check text-success'></i> Ativo</td>
-                                @endif
-                                <td>
-                                    <button type="button" value="{{ $r->id }}" class="btn btn-info verDados"><i class="fas fa-user-edit"></i> Ver Dados</button>
-                                </td>
-                            <tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
     </div>
+</div>
+<!-- End Content-->
 
 @endsection

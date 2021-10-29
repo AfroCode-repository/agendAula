@@ -17,10 +17,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home/{id}',[AlunoController::class,'showFiltroCalendarioAluno'])->name('show.Calendario.aluno');
 
     Route::get('/novoResponsavel',[PagesController::class,'showNovoResponsavel'])->name('show.novo.responsavel');
-    Route::get('/novoAluno',[PagesController::class,'showNovoAluno'])->name('show.novo.aluno');
     Route::post('/novoResponsavel',[ResponsavelController::class,'storeNovoResponsavel'])->name('salvar.novo.responsavel');
-    Route::get('/dadosResponsavel/{id}',[PagesController::class,'showDadosResponsavel'])->name('show.dados.responsavel');
 
+    Route::get('/novoAluno',[PagesController::class,'showNovoAluno'])->name('show.novo.aluno');
+    Route::post('/novoAluno',[AlunoController::class,'storeNovoAluno'])->name('salvar.novo.aluno');
+
+    Route::get('/dadosResponsavel/{id}',[PagesController::class,'showDadosResponsavel'])->name('show.dados.responsavel');
+    Route::get('/dadosAluno/{id}',[PagesController::class,'showDadosAluno'])->name('show.dados.Aluno');
 
     Route::post('/pesquisaEndereco',[PagesController::class,'pesquisaEndereco'])->name('pesquisa.endereco');
 
